@@ -10,7 +10,7 @@ use reth_static_file_types::StaticFileSegment;
 pub type ProviderResult<Ok> = Result<Ok, ProviderError>;
 
 /// Bundled errors variants thrown by various providers.
-#[derive(Clone, Debug, PartialEq, Eq, thiserror::Error)]
+#[derive(Clone, Debug, thiserror::Error)]
 pub enum ProviderError {
     /// Database error.
     #[error(transparent)]
@@ -148,7 +148,7 @@ impl From<alloy_rlp::Error> for ProviderError {
 }
 
 /// A root mismatch error at a given block height.
-#[derive(Clone, Debug, PartialEq, Eq, Display)]
+#[derive(Clone, Debug, Display)]
 #[display("root mismatch at #{block_number} ({block_hash}): {root}")]
 pub struct RootMismatch {
     /// The target block root diff.
@@ -160,7 +160,7 @@ pub struct RootMismatch {
 }
 
 /// Consistent database view error.
-#[derive(Clone, Debug, PartialEq, Eq, Display)]
+#[derive(Clone, Debug, Display)]
 pub enum ConsistentViewError {
     /// Error thrown on attempt to initialize provider while node is still syncing.
     #[display("node is syncing. best block: {best_block:?}")]
